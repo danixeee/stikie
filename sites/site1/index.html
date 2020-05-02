@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Popper Tutorial</title>
+    <style>
+      .tooltip {
+        background: #333;
+        color: white;
+        font-weight: bold;
+        padding: 4px 8px;
+        font-size: 13px;
+        border-radius: 4px;
+        /* display: none; */
+      }
+
+      .tooltip[data-show] {
+        display: block;
+      }
+
+      .arrow,
+      .arrow::before {
+        position: absolute;
+        width: 8px;
+        height: 8px;
+        z-index: -1;
+      }
+
+      .arrow::before {
+        content: "";
+        transform: rotate(45deg);
+        background: #333;
+      }
+
+      .tooltip[data-popper-placement^="top"] > #arrow {
+        bottom: -4px;
+      }
+
+      .tooltip[data-popper-placement^="bottom"] > #arrow {
+        top: -4px;
+      }
+
+      .tooltip[data-popper-placement^="left"] > #arrow {
+        right: -4px;
+      }
+
+      .tooltip[data-popper-placement^="right"] > #arrow {
+        left: -4px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="site-blocks-cover" style="overflow: hidden;">
+      <div class="container">
+        <div class="row align-items-center justify-content-center">
+          <div
+            class="col-md-12"
+            style="position: relative;"
+            data-aos="fade-up"
+            data-aos-delay="200"
+          >
+            <img
+              id="investing-img"
+              src="images/undraw_investing_7u74.svg"
+              alt="Image"
+              class="img-fluid img-absolute"
+              style="border: 3px solid black;"
+            />
+
+            <div class="row mb-4" data-aos="fade-up" data-aos-delay="200">
+              <div class="col-lg-6 mr-auto">
+                <h1>Make Your Business More Profitable</h1>
+                <p class="mb-5">
+                  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                  Laboriosam assumenda ea quo cupiditate facere deleniti fuga
+                  officia.
+                </p>
+                <div>
+                  <a href="#" class="btn btn-primary mr-2 mb-2">Get Started</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <button id="button" aria-describedby="tooltip">My button</button>
+    <div id="comments">
+      <!-- <div id="tooltip1" role="tooltip" class="tooltip">
+        My tooltip 1
+        <input type="text" value="Neki input" />
+        <div class="arrow" data-popper-arrow></div>
+      </div>
+      <div id="tooltip2" role="tooltip" class="tooltip">
+        My tooltip 2
+        <div class="arrow" data-popper-arrow></div>
+      </div> -->
+    </div>
+    <script src="../../stikiejs/dest/bundle.js"></script>
+  </body>
+</html>
