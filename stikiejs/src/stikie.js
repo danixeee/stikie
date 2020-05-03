@@ -35,6 +35,10 @@ function create(parent, comment, x = 0, y = 0) {
     placement: "top-start",
     modifiers: [
       {
+        name: "flip",
+        enabled: false,
+      },
+      {
         name: "offset",
         options: {
           offset: [x, -y],
@@ -60,7 +64,7 @@ function addComment(el, e) {
 
   const rect = el.getBoundingClientRect();
   const x = e.clientX - rect.left; //x position within the element.
-  const y = e.clientY - rect.top + commentRect.height; //y position within the element.
+  const y = e.clientY - rect.top + commentRect.height + window.scrollY; //y position within the element.
 
   const comment = new Comment(id, getXPathForElement(el), x, y);
 
@@ -78,8 +82,9 @@ export function register() {
   // do not replace someone's on click event listener
   const existingOnClickFn = window.onclick;
   window.onclick = (e) => {
-    existingOnClickFn(e);
-
+    if (existingOnClickFn) {
+      existingOnClickFn(e);
+    }
     const elementMouseIsOver = document.elementFromPoint(e.clientX, e.clientY);
     addComment(elementMouseIsOver, e);
   };
