@@ -1,11 +1,13 @@
-// Kada se kreira klasa, kreira se i html element i odrede se pozicije u odnosu na kursor
+import { getElementByXPath } from "./utils";
 
-class AbstractComment {
+class Comment {
   constructor(id, path, x, y) {
     this.id = id;
     this.path = path;
     this.x = x;
     this.y = y;
+
+    this.templates = {}; // [template-type] = template-snippet
   }
 
   getPosition() {
@@ -19,6 +21,7 @@ class AbstractComment {
   }
 
   static getTemplate(id) {
+    // it should get template from db
     throw new Error("Not implemented!");
   }
 }

@@ -1,12 +1,13 @@
 import {
   uuidv4,
   createElementFromHTML,
-  getElementByXPath,
   getXPathForElement,
   isComment,
 } from "./utils";
 
 import { createPopper } from "@popperjs/core";
+
+let STIKIE_COMMENTS_EL;
 
 const commentsDB = [];
 
@@ -49,10 +50,26 @@ function addComment(el, e) {
   // renderComments();
 }
 
+function createCommentsContainer() {
+  const stikieCommentsElId = "stikie-comments";
+  const containerEl = createElementFromHTML(
+    `<div id="${stikieCommentsElId}"></div>`
+  );
+
+  window.document.body.insertBefore(
+    containerEl,
+    window.document.body.firstChild
+  );
+
+  return document.getElementById(stikieCommentsElId);
+}
+
 /*
  */
 export function register() {
-  // do not replace someone's on click event listener
+  STIKIE_COMMENTS_EL = createCommentsContainer();
+
+  // do not replace someone's onclick event listener
   const existingOnClickFn = window.onclick;
   window.onclick = (e) => {
     if (existingOnClickFn) {
