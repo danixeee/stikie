@@ -49,3 +49,28 @@ export function uuidv4() {
     return v.toString(16);
   });
 }
+
+/*
+ */
+export function isComment(element) {
+  const _isComment = (el) => {
+    try {
+      return el && el.getAttribute("role") === "comment";
+    } catch {
+      return false;
+    }
+  };
+
+  if (_isComment(element)) {
+    return true;
+  }
+
+  while (element.parentNode) {
+    element = element.parentNode;
+    if (_isComment(element)) {
+      return true;
+    }
+  }
+
+  return false;
+}
