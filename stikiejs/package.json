@@ -4,9 +4,9 @@
   "description": "",
   "main": "src/index.js",
   "scripts": {
-    "build-js": "./node_modules/.bin/browserify src/index.js -p esmify -o dest/bundle.js",
+    "build-js": "./node_modules/.bin/browserify src/index.js -p esmify -t browserify-css -o dest/bundle.js",
     "build": "npm run build-js",
-    "watch-js": "npm run build-js & watchify src/index.js -p esmify -o dest/bundle.js -dv",
+    "watch-js": "npm run build-js & watchify src/index.js -p esmify -t browserify-css -o dest/bundle.js -dv",
     "watch": "npm run watch-js"
   },
   "keywords": [],
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "browserify": "^16.5.1",
+    "browserify-css": "^0.15.0",
     "esmify": "^2.1.1",
     "watchify": "^3.11.1"
   }

@@ -38,28 +38,31 @@ function getCommentsContainer() {
 }
 
 export class Comment {
-  constructor(id, path, x, y) {
+  constructor(id, path, x, y, type) {
     this.id = id;
     this.path = path;
     this.x = x;
     this.y = y;
+    this.type = type;
+
+    if (!this.getHtmlElement()) {
+      getCommentsContainer().append(createElementFromHTML(Comment.getTemplate(id, type)));
+    }
   }
 
   /*
     Used when adding comments..
   */
   static createAt(targetEl, mouseX, mouseY, type) {
-    const container = getCommentsContainer();
-
     // create comment as html element
     const id = uuidv4();
     const commentEl = createElementFromHTML(Comment.getTemplate(id, type));
-    container.append(commentEl);
+    getCommentsContainer().append(commentEl);
     // calculate relative distance from top-left corner of target element
     const commentRect = commentEl.getBoundingClientRect();
     const rect = targetEl.getBoundingClientRect();
     const x = mouseX - rect.left;
-    const y = mouseY - rect.top + commentRect.height + window.scrollY;
+    const y = mouseY - rect.top + commentRect.height;
 
     return new Comment(id, getXPathForElement(targetEl), x, y);
   }
@@ -70,8 +73,7 @@ export class Comment {
 
   getPosition() {
     const el = getElementByXPath(this.path);
-    const rect = el.getBoundingClientRect();
-    return [el, rect.left + this.x, rect.top + this.y];
+    return [el, this.x, this.y];
   }
 
   getHtmlElement() {
