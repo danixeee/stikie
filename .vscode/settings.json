@@ -1,0 +1,4 @@
+{
+  "python.pythonPath": "./stikie/env/bin/python",
+  "python.formatting.autopep8Args": ["--line-length", "100"]
+}
